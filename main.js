@@ -1,56 +1,78 @@
-/*get the canvas element using its id and store it in a variable “canvas” so that we can 
-manipulate the canvas throughout the js code.*/
-canvas=document.getElementById("c");
-ctx=canvas.getContext("2d");
+var mouseEvent = "empty";
 
-//Get rference of canvas created.
-
-
-color = "red"; 
-ctx.beginPath();
-ctx.strokeStyle = color;
-ctx.lineWidth = 2;
-ctx.arc(200,200,40,0, 2*Math.PI);
-ctx.stroke();
-
-// Attach canvas and addEventListener with 'mousedown' event.
-canvas.addEventListener("mousedown",my_mousedown);
-
-
-function my_mousedown(e)
-{
-    //taking color from input box
-    //additional activity start
+    canvas = document.getElementById('myCanvas');
+    ctx = canvas.getContext("2d");
     
+    color = "black";
+    width_of_line = 2;
 
-    //additional activity ends
-    //Get the x and y coordinates when the mouse is clicked.
-mouse_x=e.clientX-canvas.offsetLeft;    
-mouse_y=e.clientY-canvas.offsetTop;   
+    /*Uncomment the correct line*/
+    //canvas.addEventListener("mousedown", my_mousedown);
+    //canvas.setEventListener("mousedown", my_mousedown);
+    //canvas.getEventListener("mousedown", my_mousedown);
+    canves.addEventListener("mousedown", my_mousedown);
+    canvas.setEventListener("mousedown", my_mousedown);
+        canvas.getEventListener("mousedown", my_mousedown);
+
+    function my_mousedown(e)
+    {
+        color = document.getElementById("color").value;
+        width_of_line = document.getElementById("width_of_line").value;
+        radius = document.getElementById("radius").value;
+        mouseEvent = "mouseDown";
+    }
+     function my_mousedown(e){
+        call ("my_mousemove")
+     }
+    /*
+    Create an event listener for "mousemove"
+    and call function my_mousemove
+    */
+
+    function my_mousemove(e)
+    {
+        /*Uncomment the correct line*/
+        current_position_of_mouse_x = e.clientX - canvas.offsetLeft;
+        current_position_of_mouse_x = e.clientX - canvas.offsetRight;
+        current_position_of_mouse_x = e.clientX - canvas.offsetBottom;
+
         
-    console.log("X = " + mouse_x + " ,Y =  " + mouse_y);
-    //Call the "circle()" function with mouse_x and mouse_y as parameters.  
-    circle(mouse_x,mouse_y);
+        create current_position_of_mouse_y andassign it e.clientY - canvas.offsetTop;
+        
+        
 
+        if (mouseEvent == "mouseDown") {
+        console.log("Current position of x and y coordinates = ");
+        console.log("x  = " + current_position_of_mouse_x + "y = " + current_position_of_mouse_y);
+        ctx.beginPath();
+        ctx.strokeStyle = color;
+        ctx.lineWidth = width_of_line;
+        ctx.arc(current_position_of_mouse_x, current_position_of_mouse_y, radius ,0 , 2 * Math.PI);
+        ctx.stroke();
+        }
+
+    }
+
+    /*Create an event listener for "mouseup"
+    and call function my_mouseup
+
+    Create a function named my_mouseup with
+    event e as parameter.
+    
+    Assign "mouseUP" to mouseEvent
+    within the function
+    */
+    
+    /*Create an event listener for "mouseleave"
+    and call function my_mouseleave
+
+    Create a function named my_mouseleave with
+    event e as parameter.
+    
+    Assign "mouseleave" to mouseEvent
+    within the function
+    */
+
+function clearArea() {
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 }
-
-
-function circle(mouse_x,mouse_y)
-{
-ctx.beginPath();
-//Assign 'color' to the 'strokeStyle' of the circle.
-ctx.strokeStyle = color;
-ctx.lineWidth = 2;
-// Use "arc()" function to create a circle.
-ctx.arc(mouse_x, mouse_y, 40 ,0 , 2*Math.PI);
-
-
-
-ctx.stroke();
-}
-
-//additional activity
-
-
-
-	
